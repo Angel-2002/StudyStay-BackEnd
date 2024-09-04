@@ -9,5 +9,5 @@ class UserS(Base):
     email = Column(String(100), unique=True, index=True)
     password = Column(String(100), unique=True, index=True)
     phone = Column(String(20), unique=True, index=True)
-    image_url = Column(String(300), unique=True, index=True)
-    role = Column(String(100), unique=True, index=True)
+    image_url = Column(String(300), nullable=True, index=True)
+    role = Column(String(100), nullable=True, index=True)

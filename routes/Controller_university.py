@@ -29,7 +29,7 @@ async def consultar_universityID(id_university:int, db:db_dependency):
 
 
 @university.put("/university/{university_id}", status_code=status.HTTP_200_OK, tags=["University"])
-async def actualizar_registro(university_id: int, nuevo: University, db:db_dependency):
+async def actualizar_university(university_id: int, nuevo: University, db:db_dependency):
     # Buscar el university por ID
     db_university = db.query(UniversityS).filter(UniversityS.id == university_id).first()
 
