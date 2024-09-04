@@ -28,6 +28,14 @@ async def consultar_usuarioID(id_usuario:int, db:db_dependency):
     return usuario
 
 
+@user.get("/verificarusu/{email}/{password}", status_code=status.HTTP_200_OK, tags=["User"])
+async def consultar_usuarioID(email:str, password:str, db:db_dependency):
+    usuario = db.query(UserS).filter(UserS.email == email, UserS.password == password).first()
+    if usuario is None:
+        raise HTTPException(status_code=404, detail="${password}")
+    return usuario
+
+
 @user.put("/usuario/{usuario_id}", status_code=status.HTTP_200_OK, tags=["User"])
 async def actualizar_registro(usuario_id: int, nuevo: User, db:db_dependency):
     # Buscar el User por ID
