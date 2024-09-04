@@ -3,6 +3,7 @@ from database import engine
 from tables import Base
 from routes.Controller_alumno import user
 from routes.Controller_university import university
+from routes.Controller_post import post
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -31,3 +32,4 @@ async def on_startup():
 
 app.include_router(user)
 app.include_router(university)
+app.include_router(post)
