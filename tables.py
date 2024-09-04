@@ -1,5 +1,5 @@
 from database import engine
-from schemas.alumno import Base
+from schemas.user import Base
 from schemas.university import Base
 from schemas.post import Base
 from schemas.reservation import Base
