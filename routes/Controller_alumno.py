@@ -6,7 +6,7 @@ from schemas.alumno import AlumnoS
 
 user=APIRouter()
 
-@user.post("/usuario/", status_code=status.HTTP_201_CREATED)
+@user.post("/usuario/", status_code=status.HTTP_201_CREATED, tags=["User"])
 async def crear_usuario(usuario:Alumno, db:db_dependency):
     db_usuario = AlumnoS(**usuario.dict())
     db.add(db_usuario)
@@ -14,13 +14,13 @@ async def crear_usuario(usuario:Alumno, db:db_dependency):
     return {"message": "Registro creado correctamente"}
 
 
-@user.get("/listarusuarios/", status_code=status.HTTP_200_OK)
+@user.get("/listarusuarios/", status_code=status.HTTP_200_OK, tags=["User"])
 async def consultar_usuarios(db:db_dependency):
     usuarios = db.query(AlumnoS).all()
     return usuarios
 
 
-@user.get("/listarusuario/{id_usuario}", status_code=status.HTTP_200_OK)
+@user.get("/listarusuario/{id_usuario}", status_code=status.HTTP_200_OK, tags=["User"])
 async def consultar_usuarioID(id_usuario:int, db:db_dependency):
     usuario = db.query(AlumnoS).filter(AlumnoS.id == id_usuario).first()
     if usuario is None:
@@ -28,7 +28,7 @@ async def consultar_usuarioID(id_usuario:int, db:db_dependency):
     return usuario
 
 
-@user.put("/usuario/{usuario_id}", status_code=status.HTTP_200_OK)
+@user.put("/usuario/{usuario_id}", status_code=status.HTTP_200_OK, tags=["User"])
 async def actualizar_registro(usuario_id: int, nuevo: Alumno, db:db_dependency):
     # Buscar el registro por ID
     db_registro = db.query(AlumnoS).filter(AlumnoS.id == usuario_id).first()

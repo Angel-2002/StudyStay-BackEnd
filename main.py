@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from database import engine
 from tables import Base
 from routes.Controller_alumno import user
+from routes.Controller_university import university
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -29,3 +30,4 @@ async def on_startup():
 #http://127.0.0.1:8000
 
 app.include_router(user)
+app.include_router(university)
