@@ -4,6 +4,7 @@ from tables import Base
 from routes.Controller_alumno import user
 from routes.Controller_university import university
 from routes.Controller_post import post
+from routes.Controller_reservation import reservation
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -11,7 +12,7 @@ app = FastAPI(
 
     title="StudiStay API",
     description="Simple API made with FastAPI and MySQL",
-    version="0.0.1"
+    version="1.0.0"
 )
 
 # Configuración para permitir todas las solicitudes CORS (debes ajustar según tus necesidades)
@@ -33,3 +34,4 @@ async def on_startup():
 app.include_router(user)
 app.include_router(university)
 app.include_router(post)
+app.include_router(reservation)
