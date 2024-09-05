@@ -51,4 +51,4 @@ async def actualizar_registro(usuario_id: int, nuevo: User, db:db_dependency):
     # Commit a la base de datos
     db.commit()
 
-    return {"message": "User actualizado correctamente"}
+    return db_registro
