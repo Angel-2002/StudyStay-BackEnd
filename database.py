@@ -4,10 +4,10 @@ from sqlalchemy.ext.declarative import declarative_base
 
 
 # URL de conexión sin especificar la base de datos
-DATABASE_URL = "mysql+pymysql://root:Zota25@localhost:3306/"
+DATABASE_URL = "mysql+pymysql://uetctip1fmcn5wdp:shwaoFGKNmOB2MVn2FqM@bbw4as08rnqsck1swmou-mysql.services.clever-cloud.com:3306/"
 
 # Nombre de la base de datos
-DATABASE_NAME = "studistay"
+DATABASE_NAME = "bbw4as08rnqsck1swmou"
 
 # Crear un motor de base de datos conectado al servidor MySQL
 engine = create_engine(DATABASE_URL)
@@ -17,7 +17,7 @@ with engine.connect() as connection:
     connection.execute(text(f"CREATE DATABASE IF NOT EXISTS {DATABASE_NAME};"))
 
 # Actualizar la URL de la base de datos para incluir el nombre de la base de datos
-DATABASE_URL = f"mysql+pymysql://root:Zota25@localhost:3306/{DATABASE_NAME}"
+DATABASE_URL = f"mysql+pymysql://uetctip1fmcn5wdp:shwaoFGKNmOB2MVn2FqM@bbw4as08rnqsck1swmou-mysql.services.clever-cloud.com:3306/{DATABASE_NAME}"
 
 # Crear el motor actualizado para conectarse a la base de datos específica
 engine = create_engine(DATABASE_URL)
