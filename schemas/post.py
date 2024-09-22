@@ -5,6 +5,7 @@ class PostS(Base):
     __tablename__ = 'posts'
 
     id = Column(Integer, primary_key=True, index=True)
+    userid = Column(Integer, nullable=False, index=True)
     title = Column(String(50), nullable=False, unique=False, index=True)
     description = Column(String(300), nullable=False, unique=False, index=True)
     address = Column(String(100), nullable=False, unique=True, index=True)
