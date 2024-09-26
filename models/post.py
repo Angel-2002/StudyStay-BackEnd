@@ -8,3 +8,4 @@ class Post(BaseModel):
     rating  : float
     image_url : str
     nearest_universities : str
+    userid: int

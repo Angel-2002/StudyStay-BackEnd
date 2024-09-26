@@ -13,6 +13,21 @@ async def crear_post(post:Post, db:db_dependency):
     db.commit()
     return {"message": "Post creado correctamente"}
 
+@post.delete("/post/{post_id}", status_code=status.HTTP_204_NO_CONTENT, tags=["Post"])
+async def delete_post(post_id: int, db: db_dependency):
+    # Buscar el post en la base de datos
+    db_post = db.query(PostS).filter(PostS.id == post_id).first()
+    
+    # Si no se encuentra el post, lanzar un error 404
+    if not db_post:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post no encontrado")
+    
+    # Eliminar el post de la base de datos
+    db.delete(db_post)
+    db.commit()
+    
+    # No se necesita devolver nada en una respuesta DELETE exitosa
+    return {"message": "Post eliminado correctamente"}
 
 @post.get("/listarposts/", status_code=status.HTTP_200_OK, tags=["Post"])
 async def consultar_posts(db:db_dependency):
