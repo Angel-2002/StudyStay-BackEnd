@@ -7,3 +7,5 @@ class Reservation(BaseModel):
     check_in_date : datetime
     check_out_date : datetime
     payment_method : str
+    post_id: int
+    user_id: int

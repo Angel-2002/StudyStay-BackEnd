@@ -10,3 +10,6 @@ class ReservationS(Base):
     check_in_date = Column(DateTime, nullable=False, unique=False, index=True)
     check_out_date = Column(DateTime, nullable=False, unique=False, index=True)
     payment_method = Column(String(100), nullable=False, unique=False, index=True)
+    post_id = Column(Integer, nullable=False, index=True)
+    user_id = Column(Integer, nullable=False, index=True)
+    
