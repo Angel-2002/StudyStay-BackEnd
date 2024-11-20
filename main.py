@@ -5,6 +5,7 @@ from routes.Controller_user import user
 from routes.Controller_university import university
 from routes.Controller_post import post
 from routes.Controller_reservation import reservation
+from routes.Controller_creditcard import card
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -35,3 +36,4 @@ app.include_router(user)
 app.include_router(university)
 app.include_router(post)
 app.include_router(reservation)
+app.include_router(card)
