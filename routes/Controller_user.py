@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 from config.db_dependency import db_dependency
+import bcrypt
 #importar las clase
 from models.user import User
 from schemas.user import UserS
@@ -9,6 +10,16 @@ user=APIRouter()
 @user.post("/usuario/", status_code=status.HTTP_201_CREATED, tags=["User"])
 async def crear_usuario(usuario:User, db:db_dependency):
     db_usuario = UserS(**usuario.dict())
+
+    # Hasheo de la contraseña
+    psswrd = usuario.password
+    hash = psswrd.encode('utf-8')
+    sal = bcrypt.gensalt()
+    encript = bcrypt.hashpw(hash,sal)
+
+    # Convertir bytes a string
+    db_usuario.password = encript.decode('utf-8')
+
     db.add(db_usuario)
     db.commit()
     return {"message": "User creado correctamente"}
@@ -30,9 +41,13 @@ async def consultar_usuarioID(id_usuario:int, db:db_dependency):
 
 @user.get("/verificarusu/{email}/{password}", status_code=status.HTTP_200_OK, tags=["User"])
 async def consultar_usuarioID(email:str, password:str, db:db_dependency):
-    usuario = db.query(UserS).filter(UserS.email == email, UserS.password == password).first()
+    usuario = db.query(UserS).filter(UserS.email == email).first()
     if usuario is None:
         raise HTTPException(status_code=404, detail="${password}")
+    
+    if not bcrypt.checkpw(password.encode('utf-8'), usuario.password.encode('utf-8')):
+        raise HTTPException(status_code=404, detail="${password}")
+
     return usuario
 
 
